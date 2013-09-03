@@ -14,10 +14,11 @@
 ActiveRecord::Schema.define(:version => 20130903230417) do
 
   create_table "widgets", :force => true do |t|
-    t.string   "name",        :null => false
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
+
+  add_index "widgets", ["name"], :name => "index_widgets_on_name", :unique => true
 
 end
