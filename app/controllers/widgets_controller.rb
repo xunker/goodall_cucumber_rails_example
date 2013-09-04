@@ -1,6 +1,8 @@
 class WidgetsController < ApplicationController
   respond_to :json
 
+  before_filter :load_widget, :only => [ :show, :destroy]
+
   rescue_from Exception, :with => :error_render_method
 
   def error_render_method(e)
@@ -14,7 +16,7 @@ class WidgetsController < ApplicationController
   end
 
   def show
-    respond_with Widget.where(:name => params[:id]).first!
+    respond_with @widget
   end
   
   def create
@@ -24,10 +26,10 @@ class WidgetsController < ApplicationController
   end
 
   def destroy
-    if Widget.where(:name => params[:id]).first!.destroy
+    if @widget.destroy
       respond_with_success
     else
-      respond_with_error
+      respond_with_error('could not delete')
     end
   end
 
@@ -39,5 +41,11 @@ class WidgetsController < ApplicationController
 
   def respond_with_error(e)
     render :json => { :error => e }
+  end
+
+  def load_widget
+    if params[:id]
+      @widget = Widget.where(:name => params[:id]).first!
+    end
   end
 end

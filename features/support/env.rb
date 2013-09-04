@@ -2,6 +2,9 @@ require 'cucumber/rails'
 require 'rspec/expectations'
 World(RSpec::Matchers)
 
+require 'goodall/cucumber'
+require 'goodall/handler/json'
+
 ActionController::Base.allow_rescue = false
 
 begin

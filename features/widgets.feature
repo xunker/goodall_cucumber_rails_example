@@ -1,4 +1,4 @@
-Feature: /widgets
+Feature: /widgets.json
 
   Scenario: I get a list of widgets
     Given widget "foo" exists
@@ -16,7 +16,6 @@ Feature: /widgets
     And I get "/widgets/foo.json"
     Then the response should be widget "foo"
 
-  @allow-rescue
   Scenario: I get a widget that does not exist
     Given I get "/widgets/nonexistent.json"
     Then I should get a "ActiveRecord::RecordNotFound" error

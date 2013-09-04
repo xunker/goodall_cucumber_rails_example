@@ -4,4 +4,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+require 'goodall/rake_task'
+
 ExampleWithCucumberAndGoodall::Application.load_tasks
